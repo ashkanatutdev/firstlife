@@ -621,5 +621,5 @@ function risposta(categoria, domanda, attivita, posizione, posizione_utente) {
     return RISPOSTA;
 }
 
-// let r = risposta('insaccati', 'dove', 'vengono venduti', 'citta', 'pos');
+// let r = risposta('pizza', 'dove', 'mangiare', 'regione', '');
 // console.log(r);
