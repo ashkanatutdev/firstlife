@@ -46,6 +46,7 @@ function findDistanza(posizione_prodotto) {
     console.log(posizione_prodotto);
     console.log("User Position: ");
     console.log(_posizione_utente.coordinates);
+    console.log(_posizione_utente.zipCode);
     return true;
 }
 
@@ -75,7 +76,8 @@ function findCitta(posizione_prodotto) {
     console.log("Product Position: ");
     console.log(posizione_prodotto);
     console.log("User Position: ");
-    console.log(_posizione_utente.coordinates);;
+    console.log(_posizione_utente.coordinates);
+    console.log(_posizione_utente.zipCode);
     return true;
 }
 
@@ -105,6 +107,7 @@ function findRegione(posizione_prodotto) {
     console.log(posizione_prodotto);
     console.log("User Position: ");
     console.log(_posizione_utente.coordinates);
+    console.log(_posizione_utente.zipCode);
     return true;
 }
 
