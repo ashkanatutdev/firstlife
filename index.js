@@ -21,9 +21,9 @@ app.intent('Default Welcome Intent', conv => {
 
 /**
  * gestisce la richiesta dell'utente.
- * -se l'utente non specifica una posizione per la ricerca (es. 'nei dintorni' o 'nella mi città'), questo intent (main) risponde all'utente
+ * -se l'utente non specifica una posizione per la ricerca (es. 'nei dintorni' o 'nella mi città'), questo intent (main) risponde all'utente.
  * -se l'utente specifica una posizione per la ricerca (es. 'nei dintorni' o 'nella mi città'), passa i parametri all'intent successivo e possiamo gestire tutto lì.
- * -(l'intent successivo potrebbe essere 'ottenere_posizione' or 'main_ottenere_cap', in base alla piattaforma che l'utente sta utilizzando)
+ * -l'intent successivo potrebbe essere 'ottenere_posizione' or 'main_ottenere_cap', in base alla piattaforma che l'utente sta utilizzando.
  */
 app.intent('main', conv => {
 

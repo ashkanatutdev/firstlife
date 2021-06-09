@@ -625,5 +625,5 @@ function risposta(categoria, domanda, attivita, posizione, posizione_utente) {
 
 
 //--- solo per prova ---
-let r = risposta('ricotte', 'dove', 'mangiare', 'regione', '');
-console.log(r);
+// let r = risposta('ricotte', 'dove', 'mangiare', 'regione', '');
+// console.log(r);
