@@ -19,8 +19,8 @@ module.exports = {
  * Per l'azienda specificare il codice assegnato all'azienda (es. per Azienda Agricola Bermond Daniele usiamo il codice AA_BERMOD)
  *
  * Per ogni prodotto viene specificato:
- * - codice (es. ROBIOLA_SANSICARIO)
- * - descrizione (es. Robiola di San Sicario)
+ * - codice (es. FORMAGGIO_1)
+ * - descrizione (es. Fiore Sardo)
  * - codice categoria di appartenenza (es. FORMAGGI)
  */
 function findProdotti(categoria) {
@@ -345,8 +345,8 @@ function findProdotti(categoria) {
  * Per il prodotto specificare il codice assegnato al prodotto (es. per Crema Contadina usiamo il codice CREMA_CONTADINA)
  *
  * Per ogni punto vendita viene specificato:
- * - codice (es. IPER_LEBAITE_CONTROCOMMERCIALE)
- * - descrizione (es. Iper Le Baite Centro Commerciale)
+ * - codice (es. PUNTO_VENDITA_1)
+ * - descrizione (es. Punto vendita 1)
  * - indirizzo (es. Corso Torino, 118, 10056 Oulx TO)
  * - contatto_telefonico (es. +390122833800)
  * - posizione (lat, lng)
@@ -521,8 +521,8 @@ function findPuntiVendita(categoria) {
  * Per il prodotto specificare il codice assegnato al prodotto (es. per Crema Contadina usiamo il codice CREMA_CONTADINA)
  *
  * Per ogni ristorante viene specificato:
- * - codice (es. IPER_LEBAITE_CONTROCOMMERCIALE)
- * - descrizione (es. Iper Le Baite Centro Commerciale)
+ * - codice (es. RISTORANTE_1)
+ * - descrizione (es. Ristorante 1)
  * - indirizzo (es. Corso Torino, 118, 10056 Oulx TO)
  * - contatto_telefonico (es. +390122833800)
  * - posizione (lat, lng)
@@ -694,8 +694,8 @@ function findRistoranti(categoria) {
  * Per il prodotto specificare il codice assegnato al prodotto (es. per Crema Contadina usiamo il codice CREMA_CONTADINA)
  *
  * Per ogni azienda viene specificato:
- * - codice (es. IPER_LEBAITE_CONTROCOMMERCIALE)
- * - descrizione (es. Iper Le Baite Centro Commerciale)
+ * - codice (es. AZIENDA_1)
+ * - descrizione (es. Azienda 1)
  * - indirizzo (es. Corso Torino, 118, 10056 Oulx TO)
  * - contatto_telefonico (es. +390122833800)
  * - posizione (lat, lng)
