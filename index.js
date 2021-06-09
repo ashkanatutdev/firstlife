@@ -16,7 +16,7 @@ const app = dialogflow();
 //intent handlers
 
 /**
- * manages welcome massage and everything user will see when strat to use the chatbot
+ * gestisce il massaggio di benvenuto e tutto ciò che l'utente vedrà quando inizierà a utilizzare il chatbot
  */
 app.intent('Default Welcome Intent', conv => {
     console.log(conv.body.originalDetectIntentRequest.source);
@@ -24,39 +24,47 @@ app.intent('Default Welcome Intent', conv => {
 });
 
 /**
- * when user askes chatbot to search for somthing 'main' intent is activated and manages user's request,
- * if user does not ask chatbot to search for a category in a specefic location like 'nei dintorni'
- * or 'nella mia citta' or 'nella mia regione' or ..., so chatbot does not need to get user's position, so
- * answers user's request within 'main' request, but if user asks chatbot to search in a specefic location
- * and mentions 'nei dintorni' or 'nella mia citta' or ... in the request, chatbot needs to get user's location
- * so pass the parameteres to next intent 'ottenere_posizione' and manages everything there.
+ * quando l'utente chiede al chatbot di cercare qualcosa l'intent "main" viene attivato e gestisce la richiesta dell'utente,
+ * se l'utente non chiede al chatbot di cercare una categoria in una posizione specifica come "nei dintorni" o "nella mia città" o
+ * "nella mia regione" o ..., quindi il chatbot non ha bisogno di ottenere la posizione dell'utente, quindi risponde alla
+ * richiesta dell'utente all'interno dell'intent "main", ma se l'utente chiede al chatbot di cercare in una posizione
+ * specifica e menziona "nei dintorni" o "nella mia città" o ... , il chatbot deve ottenere la posizione dell'utente,
+ * quindi passa i parametri all'intent successivo (si chiama "ottenere_posizione") e gestisce tutto lì.
  */
 app.intent('main', conv => {
+
+    //specifica la piattaforma che l'utente sta utilizzando per connettersi al chatbot (es. 'google' o 'dialogflow' o 'facebook')
     const source = conv.body.originalDetectIntentRequest.source;
-    let context = '';
-    let permissions = '';
+
+    //parametri di conversazione tra chatbot e utente ('attivita', 'domanda', 'posizione' and 'categorie')
     let params = conv.parameters;
 
-    //user has not mentioned "nei dintorni or nella mia citta or ..." so, chatbot shows all the locations to user
-    if (params.posizione == '') {
+    //tipo di permission (nel caso in cui dobbiamo ottenere la posizione dell'utente dall'account google)
+    let permissions = '';
 
-        /** RES = CHATBOT ANSWER, and comes from 'functions.js' based on user's request
-         *- params.categorie : this is the category which user asked for search from chatbot - eg: 'Taralli' or 'Ricotte'
-         *- params.domande : this is the type of user's question and could be : 'dove', 'quali' or ...
-         *- params.attivita : this could be 'mangiare', 'trovare', 'comprare', 'acquistare' or ...
-         *- params.posizione : this is an empty string because user did not ask chatbot to search in specefic location
-         *- location : this is null because we don't need to get user's location in this case
+    let context = '';
+
+    if (params.posizione == '') {
+        //l'utente non ha menzionato "nei dintorni o nella mia citta o ..." quindi chatbot mostra tutte le posizioni all'utente
+
+        /** RES = RISPOSTA FINALE DI CHATBOT e viene da 'functions.js' in base alla richiesta dell'utente
+         *- params.categorie : la categoria che l'utente ha chiesto per la ricerca dal chatbot - es. 'Taralli' o 'Ricotte' o ...
+         *- params.domande : il tipo di domanda dell'utente e potrebbe essere: 'dove', 'quali' o...
+         *- params.attivita : questo potrebbe essere 'mangiare', 'trovare', 'comprare', 'acquistare' o...
+         *- params.posizione : è una stringa vuota perché in questo caso l'utente non ha chiesto al chatbot di cercare in una posizione specifica
+         *- location : è null perché non abbiamo bisogno di ottenere la posizione dell'utente in questo caso
          */
         let RES = functions.risposta(params.categorie, params.domanda, params.attivita, '', null);
         conv.ask(RES);
 
-    } else {//user has mentioned "nei dintorni or nella mia citta or ..." so we ask his/her location from his/her Google Account
+    } else {
+        //l'utente ha menzionato "nei dintorni o nella mia citta o ..." quindi chiediamo la sua posizione dal suo account Google
 
-        //if user is connected from Google Assistant
         if (source == 'google') {
+            //se l'utente è connesso da Google Assistant
             if (conv.user.verification === 'VERIFIED') {
                 permissions = 'DEVICE_PRECISE_LOCATION';
-                context = 'Per sapere la tua posizione';
+                context = 'Per sapere la tua posizione'; //prima parte del massaggio (possiamo gestire solo questa parte)
             } else {
                 conv.close('Non sei verificato');
             }
@@ -65,17 +73,17 @@ app.intent('main', conv => {
                 permissions,
             };
 
-            //asking permission from user for access in his/her data on Google Account
+            //chiedere il permesso all'utente per l'accesso ai suoi dati sull'account Google
             conv.ask(new Permission(options));
 
-        //if user is connected from another platform (not Google Assistant), we change this part later...
+        //se l'utente è connesso da un'altra piattaforma (non Google Assistant) --- cambiamo questa parte in seguito ---
         } else {
             let zipCode = conv.contexts.get('main-followup').parameters.zipCode || '';
             if (zipCode == '') {
                 conv.ask('mi puoi dare il codice postale della tua posizione?');
             } else {
                 console.log(zipCode);
-                conv.ask(`la tuo codice postale è: ${zipCode}`);
+                conv.ask(`Risposata di chatbot ...`);
             }
         }
     }
@@ -87,37 +95,37 @@ app.intent('ottenere_posizione', (conv, params, confirmationGranted) => {
     const {location} = conv.device;
     console.log(params);
 
-    //if chatbot has access to user data from his/her Google Account...
     if (confirmationGranted && location) {
+        //se chatbot ha accesso ai dati dell'utente dal suo account Google...
 
-
-        /** RISPOSTA = CHATBOT ANSWER, and comes from 'functions.js' based on user's request
-         *- params.categorie : this is the category which user asked for search from chatbot - eg: 'Taralli' or 'Ricotte'
-         *- params.domande : this is the type of user's question and could be : 'dove', 'quali' or ...
-         *- params.attivita : this could be 'mangiare', 'trovare', 'comprare', 'acquistare' or ...
-         *- params.posizione : this could be 'nei dintorni', 'nella mia citta', 'nella mia regione' or ...
-         *- location : this is user's actual location which we get form user's Google Account
+        /** RISPOSTA = RISPOSTA FINALE DI CHATBOT e viene da 'functions.js' in base alla richiesta dell'utente
+         *- params.categorie : la categoria che l'utente ha chiesto per la ricerca dal chatbot - es. 'Taralli' o 'Ricotte' o ...
+         *- params.domande : il tipo di domanda dell'utente e potrebbe essere: 'dove', 'quali' o...
+         *- params.attivita : questo potrebbe essere 'mangiare', 'trovare', 'comprare', 'acquistare' o...
+         *- params.posizione : potrebbe essere 'nei dintorni', 'nella mia citta', 'nella mia regione' o...
+         *- location : questa è la posizione dell'utente che otteniamo dall'account Google dell'utente
          */
         let RISPOSTA = functions.risposta(params.categorie, params.domanda, params.attivita, params.posizione, location);
         console.log(RISPOSTA);
         conv.ask(RISPOSTA);
 
-    } else {//if user does not give permission to access the data on his/her Google Account to chatbot
+    } else {
+        //se l'utente non dà il permesso di accedere ai dati sul suo account Google a chatbot
         conv.close(`non sono riuscito a capire la tua posizione.`);
     }
 });
 
-//if user is connected from another platform (not Google Assistant), we change this part later...
+//se l'utente è connesso da un'altra piattaforma (non Google Assistant) --- cambiamo questa parte in seguito ---
 app.intent('main_ottenere_cap', conv => {
     console.log(conv.body.originalDetectIntentRequest.source);
     let params = conv.parameters;
     let zipCode = params.zipCode;
     console.log(zipCode);
-    conv.ask(`la tuo codice postale è: ${zipCode}`);
+    conv.ask(`Risposata di chatbot ...`);
 });
 //end intent handlers
 
-//Run the app
+//Esegui l'app
 const expressApp = express().use(bodyParser.json());
 expressApp.post('/fulfillment', app);
 expressApp.listen(port, function () {

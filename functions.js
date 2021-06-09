@@ -8,39 +8,38 @@ module.exports = {
 }
 
 /**
- * raggio is radius around user for calculating distance and check if there is any 'ristorante' or 'azienda' or 'punto vendita'
- * in radius of 'raggio' meter around user or not.
+ * il raggio intorno all'utente per il calcolo della distanza e controlla se c'è qualche 'ristorante' o 'azienda' o 'punto vendita' nel raggio di 'raggio' metro intorno all'utente o no.
  * @type {number}
  */
 let raggio = 500;
 
 /**
- * we can get user's 'coordinates' or 'city' or 'formattedAddress' or 'zipCode' from '_posizione_utente'.
- * - comes from 'risposta' function.
+ * possiamo ottenere le 'coordinate' o 'city' o 'formattedAddress' o 'zipCode' dell'utente da '_posizione_utente'.
+ * - viene dall'accound Google dell'utente.
  * @type object
  * @private
  */
 let _posizione_utente = {};
 
 /**
- * find "punti vendita" or "ristoranti" or "aziende" in radius of "raggio" around user using Google Map API.
- *** we need to modificate this function when we have access to Google Map API and real data.
- * @param posizione_prodotto --- posizione_prodotto could be coordinates of "PuntiVendita" or "Ristoranti" or "Aziende" for specefic product.
- * @returns {boolean} --- "true" means this location is located around the user within distance of "distance", so we can show it to user.
+ * trova "punti vendita" o "ristoranti" o "aziende" nel raggio di "raggio" intorno all'utente utilizzando Google Map API.
+ *** dobbiamo modificare questa funzione quando abbiamo accesso all'API di Google Map e ai dati reali.
+ * @param posizione_prodotto --- posizione_prodotto potrebbero essere le coordinate di "PuntoVendita" o "Ristoranti" o "Aziende" per il prodotto specifico.
+ * @returns {boolean} --- "true" significa che questa "PuntoVendita" o "Ristoranti" o "Aziende" si trova intorno all'utente entro la distanza di "raggio", quindi possiamo mostrarla all'utente.
  */
 function findDistanza(posizione_prodotto) {
     /*
      * let lng_prodotto = posizione_prodotto.lng;
      * let lat_prodotto = posizione_prodotto.lat;
-     *** so we can find actual position of 'ristorante' or 'punti_vendita' or 'azienda', using Google Map API
-     *** we also have coordinates of user (_posizione_utente), so we can find actual position of user too using Google Map API
-     *** so we can find distance between user and "punto vendita" or "ristorante" or "azienda" of "prodotto" Google Map API and name it "d".
+     *** così possiamo trovare la posizione di 'ristorante' o 'punti_vendita' o 'azienda', utilizzando Google Map API
+     *** abbiamo anche le coordinate dell'utente (viene da '_posizione_utente'), quindi possiamo trovare anche la posizione dell'utente utilizzando Google Map API
+     *** quindi possiamo trovare la distanza tra l'utente e "punto vendita" o "ristorante" o "azienda" di "prodotto", utilizzando Google Map API e nominarlo "d".
      * if(d < raggio){
      *     return true,
      * } else{
      *     return false
      * }
-     *** for now this function always returns "true", because we don't have access to Google Map API
+     *** per ora questa funzione restituisce sempre "true", perché non abbiamo accesso all'API di Google Map
      */
     console.log("Product Position: ");
     console.log(posizione_prodotto);
@@ -52,26 +51,26 @@ function findDistanza(posizione_prodotto) {
 
 
 /**
- * check if "punti vendita" or "ristoranti" or "aziende" are located in user's city using Google Map API.
- *** we need to modificate this function when we have access to Google Map API and real data.
- * @param posizione_prodotto --- posizione_prodotto could be coordinates of "PuntiVendita" or "Ristoranti" or "Aziende" for specefic product.
- * @returns {boolean} --- "true" means this location is located in user's city, so we can show it to user.
+ * verifica se "punti vendita" o "ristoranti" o "aziende" si trovano nella città dell'utente utilizzando l'API di Google Map.
+ *** dobbiamo modificare questa funzione quando abbiamo accesso all'API di Google Map e ai dati reali.
+ * @param posizione_prodotto --- posizione_prodotto potrebbero essere le coordinate di "PuntoVendita" o "Ristoranti" o "Aziende" per il prodotto specifico.
+ * @returns {boolean} --- "true" significa che questa "PuntoVendita" o "Ristoranti" o "Aziende" si trova nella città dell'utente, quindi possiamo mostrarla all'utente.
  */
 function findCitta(posizione_prodotto) {
     /*
      * let lng_prodotto = posizione_prodotto.lng;
      * let lat_prodotto = posizione_prodotto.lat;
-     *** we can find city of 'ristorante' or 'punti_vendita' or 'azienda' using Google Map API
+     *** possiamo trovare città di 'ristorante' o 'punti_vendita' o 'azienda' utilizzando Google Map API
      * let citta = ("citta" of "punto vendita" o "ristorante" o "azienda" of prodotto).toUpperCase();
-     *** we also have "citta" of user (_posizione_utente.city).
+     *** abbiamo anche "città" di utente (_posizione_utente.city).
      * let uCitta = _posizione_utente.city.toUpperCase();
-     *** so we can compare the cities.
+     *** così possiamo confrontare le città.
      * if(citta == uCitta){
      *     return true;
      * } else{
      *     return false;
      * }
-     *** for now this function always returns "true", because we don't have access to Google Map API
+     *** per ora questa funzione restituisce sempre "true", perché non abbiamo accesso all'API di Google Map
      */
     console.log("Product Position: ");
     console.log(posizione_prodotto);
@@ -82,26 +81,26 @@ function findCitta(posizione_prodotto) {
 }
 
 /**
- * check if "punti vendita" or "ristoranti" or "aziende" are located in user's region using Google Map API.
- *** we need to modificate this function when we have access to Google Map API and real data.
- * @param posizione_prodotto --- posizione_prodotto could be coordinates of "PuntiVendita" or "Ristoranti" or "Aziende" for specifec product.
- * @returns {boolean} --- "true" means this location is located in user's region, so we can show it to user.
+ * verificare se "punti vendita" o "ristoranti" o "aziende" si trovano nella regione dell'utente utilizzando l'API di Google Map.
+ *** dobbiamo modificare questa funzione quando abbiamo accesso all'API di Google Map e ai dati reali.
+ * @param posizione_prodotto --- posizione_prodotto potrebbero essere le coordinate di "PuntoVendita" o "Ristoranti" o "Aziende" per il prodotto specifico.
+ * @returns {boolean} --- "true" significa che questa "PuntoVendita" o "Ristoranti" o "Aziende" si trova nella regione dell'utente, quindi possiamo mostrarla all'utente.
  */
 function findRegione(posizione_prodotto) {
     /*
      * let lng_prodotto = posizione_prodotto.lng;
      * let lat_prodotto = posizione_prodotto.lat;
-     *** so we can find user's regione using Google Map API ??
-     * let regione = ("regione" of "punto vendita" o "ristorante" o "azienda" of prodotto).toUpperCase();
-     *** we also have "coordinates" of user (_posizione_utente.coordinates).
-     * let uRegione = (user's "regione").toUpperCase(); (perhaps we can get user's regione using coordinates of user's position)
-     *** so we can compare the regions.
+     *** quindi possiamo trovare la regione de "punto vendita" o "ristorante" o "azienda" del prodotto utilizzando l'API di Google Map ??
+     * let regione = ("regione" di "punto vendita" o "ristorante" o "azienda" of prodotto).toUpperCase();
+     *** abbiamo anche le "coordinate" dell'utente (_posizione_utente.coordinates).
+     * let uRegione = (user's "regione").toUpperCase();
+     *** così possiamo confrontare le regioni.
      * if(regione == uRegione){
      *     return true;
      * } else{
      *     return false;
      * }
-     *** for now this function always returns "true", because we don't have access to Google Map API
+     *** per ora questa funzione restituisce sempre "true", perché non abbiamo accesso all'API di Google Map
      */
     console.log("Product Position: ");
     console.log(posizione_prodotto);
@@ -112,16 +111,16 @@ function findRegione(posizione_prodotto) {
 }
 
 /**
- *********** WE DON'T NEED TO CHANGE THIS PART OF CODE DIRECTLY, IF WE WANT TO MAKE SOME CHANGES IN RESPONSE
- *********** WE CAN CHANGE IT FROM "constants.js" FILE.
+ *********** NON ABBIAMO BISOGNO DI MODIFICARE DIRETTAMENTE QUESTA PARTE DEL CODICE, SE VOGLIAMO APPORTARE ALCUNE MODIFICHE IN RISPOSTA
+ *********** POSSIAMO CAMBIARLO DAL FILE "constants.js".
  *
- * create response of chatbot
- * @param categoria --- could be "formaggi" o "ricotte" o ... and comes from chatbot intent 'parameters' based on user's request
- * @param domanda --- could be "dove (or "in quale posto")" o "quali" and comes from chatbot intent 'parameters' based on user's request
- * @param attivita --- could be "mangiare", "comprare", "trovare", ... and comes from chatbot intent 'parameters' based on user's request
- * @param posizione --- could be "dintorni ("nei dintorni" or "intorno a me" or ...)", "citta" o "regione" and comes from chatbot intent 'parameters' based on user's request (also, could be an empty string)
- * @param posizione_utente --- we can get it from user's Google Account (only when user uses Google Assistant platform and could be 'null')
- * @returns {string} --- chatbot response
+ * crea risposta di chatbot
+ * @param categoria --- potrebbe essere "formaggi" o "ricotte" o ... e viene da 'parameters' della conversazione del chatbot in base alla richiesta dell'utente
+ * @param domanda --- potrebbe essere "dove (o "in quale posto")" o "quali" e viene da 'parameters' della conversazione del chatbot in base alla richiesta dell'utente
+ * @param attivita --- potrebbe essere "mangiare", "comprare", "trovare", ... e viene da 'parameters' della conversazione del chatbot in base alla richiesta dell'utente
+ * @param posizione --- potrebbe essere "dintorni ("nei dintorni" o "intorno a me" o ...)", "citta" o "regione" e viene da 'parameters' della conversazione del chatbot in base alla richiesta dell'utente (potrebbe anche essere una stringa vuota)
+ * @param posizione_utente --- possiamo ottenerlo dall'account Google dell'utente (solo quando l'utente utilizza la piattaforma Google Assistant ed anche potrebbe essere "null")
+ * @returns {string} --- risposta di chatbot
  */
 function risposta(categoria, domanda, attivita, posizione, posizione_utente) {
     _posizione_utente = posizione_utente;
@@ -625,6 +624,6 @@ function risposta(categoria, domanda, attivita, posizione, posizione_utente) {
 }
 
 
-// --- just fot test ---
-// let r = risposta('pizza', 'dove', 'mangiare', 'regione', '');
-// console.log(r);
+//--- solo per prova ---
+let r = risposta('ricotte', 'dove', 'mangiare', 'regione', '');
+console.log(r);

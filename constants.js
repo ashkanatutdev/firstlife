@@ -6,17 +6,9 @@ module.exports = {
 }
 
 /**
- * create final part of response
- * @returns {string}
- */
-function altro(){
-    return ". voui sapere altro?";
-}
-
-/**
- * create main part of response
- * @param attivita
- * @param posizione
+ * crea la parte principale della risposta del chatbot in base ai parametri della conversazione tra chatbot e l'utente
+ * @param attivita --- potrebbe essere 'mangiare' o 'comprare' o... e viene da parametri di conversazione
+ * @param posizione --- potrebbe essere 'dintorni' o 'citta' o 'regione' o... e viene da parametri di conversazione
  * @returns {string}
  */
 function primaParte(attivita, posizione){
@@ -58,7 +50,15 @@ function primaParte(attivita, posizione){
 }
 
 /**
- * create fallback response
+ * crea la parte finale della risposta
+ * @returns {string}
+ */
+function altro(){
+    return ". voui sapere altro?";
+}
+
+/**
+ * crea una risposta di fallback
  * @returns {string}
  */
 function fallBack(){
@@ -67,8 +67,8 @@ function fallBack(){
 
 
 /**
- ********** WE DON'T NEED THIS PART OF CODE AND WHEN WE HAVE ACCESS TO REAL DATA WE CAN DELETE THIS PART COMPLETELY ***********
- * create a unique serial for any categoria
+ ********** NON ABBIAMO BISOGNO DI QUESTA PARTE DI CODICE E QUANDO ABBIAMO ACCESSO A DATI REALI POSSIAMO CANCELLARE COMPLETAMENTE QUESTA PARTE ***********
+ * crea un codice unico per ogni categoria
  * @param categoria
  * @returns {string}
  */
