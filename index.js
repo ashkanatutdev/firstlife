@@ -62,15 +62,16 @@ app.intent('main', conv => {
                 permissions,
             };
 
-            // chiedere 'permission' all'utente per l'accesso ai suoi dati sull'account Google
-            // la conversazione va all'intent 'ottenere_posizione'
+            // -chiedere 'permission' all'utente per l'accesso ai suoi dati sull'account Google
+            // -la conversazione va all'intent 'ottenere_posizione'
             conv.ask(new Permission(options));
 
         } else {
-            // -se l'utente è connesso da un'altra piattaforma (non Google Assistant)
+            // se l'utente è connesso da un'altra piattaforma (non Google Assistant)
             // -se abbiamo gia il coordinate oppure CAP dell'utente chatbot risponde qui:
             conv.ask(`Risposata di chatbot ...`);
             // -se non abbiamo coordinate oppure CAP dell'utente, passiamo i parametri all'intent "main_ottenere_cap"
+            // -la conversazione va all'intent 'ottenere_posizione'
         }
     }
 });
