@@ -71,7 +71,7 @@ app.intent('main', conv => {
             // -se abbiamo gia il coordinate oppure CAP dell'utente chatbot risponde qui:
             conv.ask(`Risposata di chatbot ...`);
             // -se non abbiamo coordinate oppure CAP dell'utente, passiamo i parametri all'intent "main_ottenere_cap"
-            // -la conversazione va all'intent 'ottenere_posizione'
+            // -la conversazione va all'intent 'main_ottenere_cap'
         }
     }
 });
@@ -84,14 +84,14 @@ app.intent('ottenere_posizione', (conv, params, confirmationGranted) => {
     console.log(params);
 
     if (confirmationGranted && location) {
-        //se chatbot ha accesso ai dati dell'utente dal suo account Google...
+        // se abbiamo accesso ai dati dell'utente dal suo account Google, il chatbot risponde qui:
 
-        //RISPOSTA FINALE DI CHATBOT
+        // RISPOSTA FINALE DI CHATBOT
         let RISPOSTA = functions.risposta(params.categorie, params.domanda, params.attivita, params.posizione, location);
         conv.ask(RISPOSTA);
 
     } else {
-        //se l'utente non dà il permesso di accedere ai dati sul suo account Google a chatbot
+        // se l'utente non dà il permesso di accedere ai dati sul suo account Google a chatbot
         conv.close(`non sono riuscito a capire la tua posizione.`);
     }
 });
@@ -101,7 +101,7 @@ app.intent('ottenere_posizione', (conv, params, confirmationGranted) => {
 // -cambiamo questa parte in seguito, perche non possiamo ottenere dati dell'utente dall'account Google, quando l'utente non usa Google Assistant.
 // -dobbiamo ottenre coordinate oppure CAP dell'utente ma non possiamo ottenerlo dall'account Google Assistant
 app.intent('main_ottenere_cap', conv => {
-    // otteniamo coordinate oppure CAP dell'utente qui ...
+    // otteniamo coordinate oppure CAP dell'utente qui...
     conv.ask(`Risposata di chatbot ...`);
 });
 
