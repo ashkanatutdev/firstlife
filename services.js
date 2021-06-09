@@ -1,31 +1,23 @@
 // services
-
 module.exports = {
-    findProdotti,
-    findRistoranti,
-    findAziende,
-    findPuntiVendita
+    findProdotti
 }
+
+const constants = require('./constants')
 
 /**
  * Restituisce l'elenco dei prodotti specificando:
- * - codice categoria e posizione oppure
- * - codice categoria oppure
- * - posizione oppure
- * - codice azienda
- *
- * Per la categoria specificare il codice di categoria (es. FORMAGGI)
- * Per la posizione specificare lat e lng
- * Per l'azienda specificare il codice assegnato all'azienda (es. per Azienda Agricola Bermond Daniele usiamo il codice AA_BERMOD)
- *
  * Per ogni prodotto viene specificato:
  * - codice (es. FORMAGGIO_1)
  * - descrizione (es. Fiore Sardo)
  * - codice categoria di appartenenza (es. FORMAGGI)
+ * - un Object per punti vendita del quel prodotto
+ * - un Object per ristoranti del quel prodotto
+ * - un Object per aziende del quel prodotto
  */
 function findProdotti(categoria) {
     let prodotti = null;
-    if (categoria == "FORMAGGI") {
+    if (constants.creaCodice(categoria) == "FORMAGGI") {
         prodotti = [{
             codice: "FORMAGGIO_1",
             descrizione: "Fiore Sardo",
@@ -41,7 +33,7 @@ function findProdotti(categoria) {
             punti_vendita: findPuntiVendita("FORMAGGI")[0],
             ristoranti: findRistoranti("FORMAGGI")[0]
         }];
-    } else if (categoria == "RICOTTE") {
+    } else if (constants.creaCodice(categoria) == "RICOTTE") {
         prodotti = [{
             codice: "RICOTTA_1",
             descrizione: "Ricotta di Capra",
@@ -57,7 +49,7 @@ function findProdotti(categoria) {
             punti_vendita: findPuntiVendita("RICOTTE")[0],
             ristoranti: findRistoranti("RICOTTE")[0]
         }];
-    } else if (categoria == "MOZZARELLE") {
+    } else if (constants.creaCodice(categoria) == "MOZZARELLE") {
         prodotti = [{
             codice: "MOZZARELLA_1",
             descrizione: "Mozzarella di Bufala",
@@ -73,7 +65,7 @@ function findProdotti(categoria) {
             punti_vendita: findPuntiVendita("MOZZARELLE")[0],
             ristoranti: findRistoranti("MOZZARELLE")[0]
         }];
-    } else if (categoria == "FORMAGGI_LOCALI") {
+    } else if (constants.creaCodice(categoria) == "FORMAGGI_LOCALI") {
         prodotti = [{
             codice: "FORMAGGI_LOCALI_1",
             descrizione: "Formaggio locali 1",
@@ -89,7 +81,7 @@ function findProdotti(categoria) {
             punti_vendita: findPuntiVendita("FORMAGGI_LOCALI")[0],
             ristoranti: findRistoranti("FORMAGGI_LOCALI")[0]
         }];
-    } else if (categoria == "FORMAGGI_STAGIONATI") {
+    } else if (constants.creaCodice(categoria) == "FORMAGGI_STAGIONATI") {
         prodotti = [{
             codice: "FORMAGGI_STAGIONATI_1",
             descrizione: "Grana Padano",
@@ -105,7 +97,7 @@ function findProdotti(categoria) {
             punti_vendita: findPuntiVendita("FORMAGGI_STAGIONATI")[0],
             ristoranti: findRistoranti("FORMAGGI_STAGIONATI")[0]
         }];
-    } else if (categoria == "FORMAGGI_FRESCHI") {
+    } else if (constants.creaCodice(categoria) == "FORMAGGI_FRESCHI") {
         prodotti = [{
             codice: "FORMAGGI_FRESCHI_1",
             descrizione: "Robiola",
@@ -121,7 +113,7 @@ function findProdotti(categoria) {
             punti_vendita: findPuntiVendita("FORMAGGI_FRESCHI")[0],
             ristoranti: findRistoranti("FORMAGGI_FRESCHI")[0]
         }];
-    } else if (categoria == "BASE_DI_LATTE") {
+    } else if (constants.creaCodice(categoria) == "BASE_DI_LATTE") {
         prodotti = [{
             codice: "PRODOTTO_A_BASE_DI_LATTE_1",
             descrizione: "Latte Integrata",
@@ -137,7 +129,7 @@ function findProdotti(categoria) {
             punti_vendita: findPuntiVendita("BASE_DI_LATTE")[0],
             ristoranti: findRistoranti("BASE_DI_LATTE")[0]
         }];
-    } else if (categoria == "PROVOLONI") {
+    } else if (constants.creaCodice(categoria) == "PROVOLONI") {
         prodotti = [{
             codice: "PROVOLONE_1",
             descrizione: "Provolone Dolce",
@@ -153,7 +145,7 @@ function findProdotti(categoria) {
             punti_vendita: findPuntiVendita("PROVOLONI")[0],
             ristoranti: findRistoranti("PROVOLONI")[0]
         }];
-    } else if (categoria == "DA_FORNO") {
+    } else if (constants.creaCodice(categoria) == "DA_FORNO") {
         prodotti = [{
             codice: "PRODOTTO_DA_FORNO_1",
             descrizione: "Biscotti",
@@ -169,7 +161,7 @@ function findProdotti(categoria) {
             punti_vendita: findPuntiVendita("DA_FORNO")[0],
             ristoranti: findRistoranti("DA_FORNO")[0]
         }];
-    } else if (categoria == "INSACCATI") {
+    } else if (constants.creaCodice(categoria) == "INSACCATI") {
         prodotti = [{
             codice: "INSACCATI_1",
             descrizione: "Wrustel",
@@ -185,7 +177,7 @@ function findProdotti(categoria) {
             punti_vendita: findPuntiVendita("INSACCATI")[0],
             ristoranti: findRistoranti("INSACCATI")[0]
         }];
-    } else if (categoria == "TORTE_SALATE") {
+    } else if (constants.creaCodice(categoria) == "TORTE_SALATE") {
         prodotti = [{
             codice: "TORTE_SALATE_1",
             descrizione: "Torta Salata alla Zucca",
@@ -201,7 +193,7 @@ function findProdotti(categoria) {
             punti_vendita: findPuntiVendita("TORTE_SALATE")[0],
             ristoranti: findRistoranti("TORTE_SALATE")[0]
         }];
-    } else if (categoria == "YOGURT") {
+    } else if (constants.creaCodice(categoria) == "YOGURT") {
         prodotti = [{
             codice: "YOGURT_1",
             descrizione: "Yogurt di Soia",
@@ -217,7 +209,7 @@ function findProdotti(categoria) {
             punti_vendita: findPuntiVendita("YOGURT")[0],
             ristoranti: findRistoranti("YOGURT")[0]
         }];
-    } else if (categoria == "LATTICINI") {
+    } else if (constants.creaCodice(categoria) == "LATTICINI") {
         prodotti = [{
             codice: "LATTICINI_1",
             descrizione: "Burro",
@@ -233,7 +225,7 @@ function findProdotti(categoria) {
             punti_vendita: findPuntiVendita("LATTICINI")[0],
             ristoranti: findRistoranti("LATTICINI")[0]
         }];
-    } else if (categoria == "PASTA_FRESCA") {
+    } else if (constants.creaCodice(categoria) == "PASTA_FRESCA") {
         prodotti = [{
             codice: "PASTA_FRESCA_1",
             descrizione: "Tagliatelle",
@@ -249,7 +241,7 @@ function findProdotti(categoria) {
             punti_vendita: findPuntiVendita("PASTA_FRESCA")[0],
             ristoranti: findRistoranti("PASTA_FRESCA")[0]
         }];
-    } else if (categoria == "PASTA_FRESCA_RIPIENA") {
+    } else if (constants.creaCodice(categoria) == "PASTA_FRESCA_RIPIENA") {
         prodotti = [{
             codice: "PASTA_FRESCA_RIPIENA_1",
             descrizione: "Culurgiones",
@@ -265,7 +257,7 @@ function findProdotti(categoria) {
             punti_vendita: findPuntiVendita("PASTA_FRESCA_RIPIENA")[0],
             ristoranti: findRistoranti("PASTA_FRESCA_RIPIENA")[0]
         }];
-    } else if (categoria == "TARALLI") {
+    } else if (constants.creaCodice(categoria) == "TARALLI") {
         prodotti = [{
             codice: "TARALLI_1",
             descrizione: "Tarallini al Peperoncino",
@@ -281,7 +273,7 @@ function findProdotti(categoria) {
             punti_vendita: findPuntiVendita("TARALLI")[0],
             ristoranti: findRistoranti("TARALLI")[0]
         }];
-    } else if (categoria == "PIZZA") {
+    } else if (constants.creaCodice(categoria) == "PIZZA") {
         prodotti = [{
             codice: "PIZZA_1",
             descrizione: "Pizza Quattro Formaggi",
@@ -297,7 +289,7 @@ function findProdotti(categoria) {
             punti_vendita: findPuntiVendita("PIZZA")[0],
             ristoranti: findRistoranti("PIZZA")[0]
         }];
-    } else if (categoria == "PANE") {
+    } else if (constants.creaCodice(categoria) == "PANE") {
         prodotti = [{
             codice: "PANE_1",
             descrizione: "Pane Ciabatta",
@@ -313,7 +305,7 @@ function findProdotti(categoria) {
             punti_vendita: findPuntiVendita("PANE")[0],
             ristoranti: findRistoranti("PANE")[0]
         }];
-    } else if (categoria == "SALSICCE") {
+    } else if (constants.creaCodice(categoria) == "SALSICCE") {
         prodotti = [{
             codice: "SALSICCE_1",
             descrizione: "Salsiccia Piccante",
@@ -334,16 +326,6 @@ function findProdotti(categoria) {
 }
 
 /**
- * Restituisce l'elenco dei punti vendita specificando:
- * - codice categoria e posizione oppure
- * - codice categoria oppure
- * - posizione oppure
- * - codice prodotto
- *
- * Per la categoria specificare il codice di categoria (es. FORMAGGI)
- * Per la posizione specificare lat e lng
- * Per il prodotto specificare il codice assegnato al prodotto (es. per Crema Contadina usiamo il codice CREMA_CONTADINA)
- *
  * Per ogni punto vendita viene specificato:
  * - codice (es. PUNTO_VENDITA_1)
  * - descrizione (es. Punto vendita 1)
@@ -510,16 +492,6 @@ function findPuntiVendita(categoria) {
 }
 
 /**
- * Restituisce l'elenco dei ristoranti specificando:
- * - codice categoria e posizione oppure
- * - codice categoria oppure
- * - posizione oppure
- * - codice prodotto
- *
- * Per la categoria specificare il codice di categoria (es. FORMAGGI)
- * Per la posizione specificare lat e lng
- * Per il prodotto specificare il codice assegnato al prodotto (es. per Crema Contadina usiamo il codice CREMA_CONTADINA)
- *
  * Per ogni ristorante viene specificato:
  * - codice (es. RISTORANTE_1)
  * - descrizione (es. Ristorante 1)
@@ -686,13 +658,6 @@ function findRistoranti(categoria) {
 }
 
 /**
- * Restituisce l'elenco delle aziende specificando:
- * - codice categoria oppure
- * - codice prodotto
- *
- * Per la categoria specificare il codice di categoria (es. FORMAGGI)
- * Per il prodotto specificare il codice assegnato al prodotto (es. per Crema Contadina usiamo il codice CREMA_CONTADINA)
- *
  * Per ogni azienda viene specificato:
  * - codice (es. AZIENDA_1)
  * - descrizione (es. Azienda 1)

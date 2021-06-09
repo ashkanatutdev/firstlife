@@ -8,14 +8,14 @@ module.exports = {
 }
 
 /**
- * il raggio intorno all'utente per il calcolo della distanza e controlla se c'è qualche 'ristorante' o 'azienda' o 'punto vendita' nel raggio di 'raggio' metro intorno all'utente o no.
+ * - viene da constants.js.
  * @type {number}
  */
-let raggio = 500;
+let raggio = constants.raggio();
 
 /**
- * possiamo ottenere le 'coordinate' o 'city' o 'formattedAddress' o 'zipCode' dell'utente da '_posizione_utente'.
- * - viene dall'accound Google dell'utente.
+ * - possiamo ottenere le 'coordinate' o 'city' o 'formattedAddress' o 'zipCode' dell'utente da '_posizione_utente'.
+ * - viene dall'account Google dell'utente.
  * @type object
  * @private
  */
@@ -111,9 +111,6 @@ function findRegione(posizione_prodotto) {
 }
 
 /**
- *********** NON ABBIAMO BISOGNO DI MODIFICARE DIRETTAMENTE QUESTA PARTE DEL CODICE, SE VOGLIAMO APPORTARE ALCUNE MODIFICHE IN RISPOSTA
- *********** POSSIAMO CAMBIARLO DAL FILE "constants.js".
- *
  * crea risposta di chatbot
  * @param categoria --- potrebbe essere "formaggi" o "ricotte" o ... e viene da 'parameters' della conversazione del chatbot in base alla richiesta dell'utente
  * @param domanda --- potrebbe essere "dove (o "in quale posto")" o "quali" e viene da 'parameters' della conversazione del chatbot in base alla richiesta dell'utente
@@ -124,8 +121,8 @@ function findRegione(posizione_prodotto) {
  */
 function risposta(categoria, domanda, attivita, posizione, posizione_utente) {
     _posizione_utente = posizione_utente;
-    let CODICE_DI_CATEGORIA = constants.creaCodice(categoria);
-    let PRODOTTI = services.findProdotti(CODICE_DI_CATEGORIA);
+    // let CODICE_DI_CATEGORIA = constants.creaCodice(categoria);
+    let PRODOTTI = services.findProdotti(categoria);
     let RISPOSTA = ``;
     if (domanda == 'quali') {
         if (attivita == 'comprare' || attivita == 'trovare' || attivita == 'acquistare') {
@@ -625,5 +622,5 @@ function risposta(categoria, domanda, attivita, posizione, posizione_utente) {
 
 
 //--- solo per prova ---
-// let r = risposta('ricotte', 'dove', 'mangiare', 'regione', '');
+// let r = risposta('mozzarelle', 'dove', 'vengono prodotti', 'citta', '');
 // console.log(r);

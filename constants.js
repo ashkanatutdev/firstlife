@@ -2,7 +2,16 @@ module.exports = {
     creaCodice,
     altro,
     primaParte,
-    fallBack
+    fallBack,
+    raggio
+}
+
+/**
+ * il raggio intorno all'utente per il calcolo della distanza e controlla se c'è qualche 'ristorante' o 'azienda' o 'punto vendita' nel raggio di 'raggio' metro intorno all'utente o no.
+ * @returns {number}
+ */
+function raggio(){
+    return 1000;
 }
 
 /**
@@ -15,7 +24,7 @@ function primaParte(attivita, posizione){
     let primaParte = '';
     switch (posizione){
         case 'dintorni':
-            primaParte += `Nel raggio di 500 mt dalla tua posizione, `;
+            primaParte += `Nel raggio di ${raggio()} mt dalla tua posizione, `;
             if (attivita == 'comprare' || attivita == 'trovare' || attivita == 'acquistare' || attivita == 'mangiare') {
                 primaParte += `puoi ${attivita}, `
             } else if (attivita == 'producono' || attivita == 'fanno' || attivita == 'confezionano' || attivita == 'vengono prodotti' || attivita == 'vengono venduti'){
@@ -67,7 +76,6 @@ function fallBack(){
 
 
 /**
- ********** NON ABBIAMO BISOGNO DI QUESTA PARTE DI CODICE E QUANDO ABBIAMO ACCESSO A DATI REALI POSSIAMO CANCELLARE COMPLETAMENTE QUESTA PARTE ***********
  * crea un codice unico per ogni categoria
  * @param categoria
  * @returns {string}
