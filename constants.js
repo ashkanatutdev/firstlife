@@ -15,7 +15,7 @@ function raggio(){
 }
 
 /**
- * crea la parte principale della risposta del chatbot in base ai parametri della conversazione tra chatbot e l'utente
+ * crea la prima parte della risposta del chatbot in base ai parametri della conversazione tra chatbot e l'utente
  * @param attivita --- potrebbe essere 'mangiare' o 'comprare' o... e viene da parametri di conversazione
  * @param posizione --- potrebbe essere 'dintorni' o 'citta' o 'regione' o... e viene da parametri di conversazione
  * @returns {string}

@@ -24,8 +24,8 @@ let _posizione_utente = {};
 /**
  * trova "punti vendita" o "ristoranti" o "aziende" nel raggio di "raggio" intorno all'utente utilizzando Google Map API.
  *** dobbiamo modificare questa funzione quando abbiamo accesso all'API di Google Map e ai dati reali.
- * @param posizione_prodotto --- posizione_prodotto potrebbero essere le coordinate di "PuntoVendita" o "Ristoranti" o "Aziende" per il prodotto specifico.
- * @returns {boolean} --- "true" significa che questa "PuntoVendita" o "Ristoranti" o "Aziende" si trova intorno all'utente entro la distanza di "raggio", quindi possiamo mostrarla all'utente.
+ * @param posizione_prodotto --- posizione_prodotto potrebbero essere le coordinate di "PuntoVendita" o "Ristorante" o "Azienda" per il prodotto specifico.
+ * @returns {boolean} --- "true" significa che questa "PuntoVendita" o "Ristorante" o "Azienda" si trova intorno all'utente entro la distanza di "raggio", quindi possiamo mostrarla all'utente.
  */
 function findDistanza(posizione_prodotto) {
     /*
@@ -53,8 +53,8 @@ function findDistanza(posizione_prodotto) {
 /**
  * verifica se "punti vendita" o "ristoranti" o "aziende" si trovano nella città dell'utente utilizzando l'API di Google Map.
  *** dobbiamo modificare questa funzione quando abbiamo accesso all'API di Google Map e ai dati reali.
- * @param posizione_prodotto --- posizione_prodotto potrebbero essere le coordinate di "PuntoVendita" o "Ristoranti" o "Aziende" per il prodotto specifico.
- * @returns {boolean} --- "true" significa che questa "PuntoVendita" o "Ristoranti" o "Aziende" si trova nella città dell'utente, quindi possiamo mostrarla all'utente.
+ * @param posizione_prodotto --- posizione_prodotto potrebbero essere le coordinate di "PuntoVendita" o "Ristorante" o "Azienda" per il prodotto specifico.
+ * @returns {boolean} --- "true" significa che questa "PuntoVendita" o "Ristorante" o "Azienda" si trova nella città dell'utente, quindi possiamo mostrarla all'utente.
  */
 function findCitta(posizione_prodotto) {
     /*
@@ -83,8 +83,8 @@ function findCitta(posizione_prodotto) {
 /**
  * verificare se "punti vendita" o "ristoranti" o "aziende" si trovano nella regione dell'utente utilizzando l'API di Google Map.
  *** dobbiamo modificare questa funzione quando abbiamo accesso all'API di Google Map e ai dati reali.
- * @param posizione_prodotto --- posizione_prodotto potrebbero essere le coordinate di "PuntoVendita" o "Ristoranti" o "Aziende" per il prodotto specifico.
- * @returns {boolean} --- "true" significa che questa "PuntoVendita" o "Ristoranti" o "Aziende" si trova nella regione dell'utente, quindi possiamo mostrarla all'utente.
+ * @param posizione_prodotto --- posizione_prodotto potrebbero essere le coordinate di "PuntoVendita" o "Ristorante" o "Azienda" per il prodotto specifico.
+ * @returns {boolean} --- "true" significa che questa "PuntoVendita" o "Ristoranto" o "Azienda" si trova nella regione dell'utente, quindi possiamo mostrarla all'utente.
  */
 function findRegione(posizione_prodotto) {
     /*
@@ -622,5 +622,5 @@ function risposta(categoria, domanda, attivita, posizione, posizione_utente) {
 
 
 //--- solo per prova ---
-// let r = risposta('mozzarelle', 'dove', 'vengono prodotti', 'citta', '');
+// let r = risposta('mozzarelle', 'dove', 'vengono prodotti', 'dintorni', '');
 // console.log(r);

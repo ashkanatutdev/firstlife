@@ -7,8 +7,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const {
     dialogflow,
-    Image,
-    Permission,
+    Permission
 } = require('actions-on-google');
 
 const app = dialogflow();
